@@ -1,3 +1,5 @@
+import pickle
+
 from base.recommender import Recommender
 from util import config
 import numpy as np
@@ -128,6 +130,19 @@ class IterativeRecommender(Recommender):
             ids, scores = find_k_largest(N, candidates)
             item_names = [self.data.id2item[iid] for iid in ids]
             recList[user] = list(zip(item_names, scores))
+
+            # # todo : delete
+            # with open('E:\\课程\\推荐系统\\temp_result.txt','a+',encoding='UTF-8') as f:
+            #     f.write(str(user))
+            #     f.write(": ")
+            #     for item in recList[user]:
+            #         f.write(str(item))
+            #         f.write(" ")
+            #     f.write("\n")
+
+
+        # with open('E:\\课程\\推荐系统\\temp_result.txt','w') as f:
+        #     f.write(str(pickle.dumps(recList)))
         measure = Measure.rankingMeasure(self.data.testSet_u, recList, [N])
         if len(self.bestPerformance)>0:
             count = 0

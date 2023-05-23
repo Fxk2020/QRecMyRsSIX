@@ -1,14 +1,17 @@
 import math
+
+
 class Measure(object):
     def __init__(self):
         pass
+
     @staticmethod
     def ratingMeasure(res):
         measure = []
         mae = Measure.MAE(res)
-        measure.append('MAE:'+str(mae)+'\n')
+        measure.append('MAE:' + str(mae) + '\n')
         rmse = Measure.RMSE(res)
-        measure.append('RMSE:' + str(rmse)+'\n')
+        measure.append('RMSE:' + str(rmse) + '\n')
         return measure
 
     @staticmethod
@@ -38,8 +41,8 @@ class Measure(object):
             indicators.append('Recall:' + str(recall) + '\n')
             F1 = Measure.F1(prec, recall)
             indicators.append('F1:' + str(F1) + '\n')
-            #MAP = Measure.MAP(origin, predicted, n)
-            #indicators.append('MAP:' + str(MAP) + '\n')
+            # MAP = Measure.MAP(origin, predicted, n)
+            # indicators.append('MAP:' + str(MAP) + '\n')
             NDCG = Measure.NDCG(origin, predicted, n)
             indicators.append('NDCG:' + str(NDCG) + '\n')
             # AUC = Measure.AUC(origin,res,rawRes)
@@ -67,19 +70,20 @@ class Measure(object):
     #     return sum_prec / len(res)
 
     @staticmethod
-    def NDCG(origin,res,N):
+    def NDCG(origin, res, N):
         sum_NDCG = 0
         for user in res:
             DCG = 0
             IDCG = 0
-            #1 = related, 0 = unrelated
+            # 1 = related, 0 = unrelated
             for n, item in enumerate(res[user]):
                 if item[0] in origin[user]:
-                    DCG+= 1.0/math.log(n+2)
+                    DCG += 1.0 / math.log(n + 2)
             for n, item in enumerate(list(origin[user].keys())[:N]):
-                IDCG+=1.0/math.log(n+2)
+                IDCG += 1.0 / math.log(n + 2)
             sum_NDCG += DCG / IDCG
         return sum_NDCG / len(res)
+
     # @staticmethod
     # def AUC(origin, res, rawRes):
     #
@@ -104,7 +108,7 @@ class Measure(object):
 
     @staticmethod
     def recall(hits, origin):
-        recallList = [hits[user]/len(origin[user]) for user in hits]
+        recallList = [hits[user] / len(origin[user]) for user in hits]
         recall = sum(recallList) / len(recallList)
         return recall
 
@@ -120,23 +124,19 @@ class Measure(object):
         error = 0
         count = 0
         for entry in res:
-            error+=abs(entry[2]-entry[3])
-            count+=1
-        if count==0:
+            error += abs(entry[2] - entry[3])
+            count += 1
+        if count == 0:
             return error
-        return error/count
+        return error / count
 
     @staticmethod
     def RMSE(res):
         error = 0
         count = 0
         for entry in res:
-            error += (entry[2] - entry[3])**2
+            error += (entry[2] - entry[3]) ** 2
             count += 1
-        if count==0:
+        if count == 0:
             return error
-        return math.sqrt(error/count)
-
-
-
-
+        return math.sqrt(error / count)

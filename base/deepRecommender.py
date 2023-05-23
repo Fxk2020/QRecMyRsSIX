@@ -1,6 +1,9 @@
+# import tensorflow as tf
 from base.iterativeRecommender import IterativeRecommender
 from random import shuffle,randint,choice
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+
 
 class DeepRecommender(IterativeRecommender):
     def __init__(self,conf,trainingSet,testSet,fold='[1]'):

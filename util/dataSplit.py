@@ -1,13 +1,15 @@
 from random import random
 from util.io import FileIO
+
+
 class DataSplit(object):
 
     def __init__(self):
         pass
 
     @staticmethod
-    def dataSplit(data,test_ratio = 0.3,output=False,path='./',order=1,binarized = False):
-        if test_ratio>=1 or test_ratio <=0:
+    def dataSplit(data, test_ratio=0.3, output=False, path='./', order=1, binarized=False):
+        if test_ratio >= 1 or test_ratio <= 0:
             test_ratio = 0.3
         testSet = []
         trainingSet = []
@@ -21,19 +23,19 @@ class DataSplit(object):
             else:
                 trainingSet.append(entry)
         if output:
-            FileIO.writeFile(path,'testSet['+str(order)+']',testSet)
+            FileIO.writeFile(path, 'testSet[' + str(order) + ']', testSet)
             FileIO.writeFile(path, 'trainingSet[' + str(order) + ']', trainingSet)
-        return trainingSet,testSet
+        return trainingSet, testSet
 
     @staticmethod
-    def crossValidation(data,k,output=False,path='./',order=1,binarized=False):
-        if k<=1 or k>10:
-            k=3
+    def crossValidation(data, k, output=False, path='./', order=1, binarized=False):
+        if k <= 1 or k > 10:
+            k = 3
         for i in range(k):
             trainingSet = []
             testSet = []
-            for ind,line in enumerate(data):
-                if ind%k == i:
+            for ind, line in enumerate(data):
+                if ind % k == i:
                     if binarized:
                         if line[2]:
                             testSet.append(line[:])
@@ -41,6 +43,11 @@ class DataSplit(object):
                         testSet.append(line[:])
                 else:
                     trainingSet.append(line[:])
-            yield trainingSet,testSet
+            yield trainingSet, testSet
 
 
+if __name__ == '__main__':
+    with open("C:\\Users\\yuanbao\\Desktop\\GitHub\\LightGCN\\dataset\\course\\training.txt") as f:
+        ratings = f.readlines()
+    DataSplit.dataSplit(data=ratings, test_ratio=0.2, output=True,
+                        path="C:\\Users\\yuanbao\\Desktop\\GitHub\\LightGCN\\genDatasets\\")

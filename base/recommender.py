@@ -153,7 +153,8 @@ class Recommender(object):
             if i % 100 == 0:
                 print(self.modelName, self.foldInfo, 'progress:' + str(i) + '/' + str(userCount))
             for item in recList[user]:
-                line += ' (' + item[0] + ',' + str(item[1]) + ')'
+                line += item[0] + ','
+                # line += ' (' + item[0] + ',' + str(item[1]) + ')'
                 if item[0] in self.data.testSet_u[user]:
                     line += '*'
             line += '\n'

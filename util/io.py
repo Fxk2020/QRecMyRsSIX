@@ -76,6 +76,12 @@ class FileIO(object):
             return trainingData
 
     @staticmethod
+    def loadDataSetEasy(file):
+        with open(file) as f:
+            ratings = f.readlines()
+
+        return ratings
+    @staticmethod
     def loadUserList(filepath):
         userList = []
         print('loading user List...')
