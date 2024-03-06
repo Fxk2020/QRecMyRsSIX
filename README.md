@@ -14,7 +14,7 @@
 
 ### 2.代码实现
 
-结合\href{https://github.com/Coder-Yu/QRec}{GitHub上开源项目QRec}对六种算法模型进行Python代码实现。
+结合[GitHub上开源项目QRec](https://github.com/Coder-Yu/QRec)对六种算法模型进行Python代码实现。
 
 - 在config目录下是算法模型需要参数的配置文件
 - dataset目录下是用到的数据集包括训练数据集和测试数据集
@@ -24,6 +24,14 @@
 - util目录下的dataSplit.py是我们划分训练数据集的代码
 - 主目录下的main.py是程序入口、QRec.py中是对模型算法的初始化
 
-### 3.论文
+### 3.最终结果+论文
 
-暂时不提交，课程结束后提交
+我们设计的LightGCN算法与其他主流算法的性能对比如下，
+
+![image-20240306100248299](https://raw.githubusercontent.com/Fxk2020/Kmeans/master/img/image-20240306100248299.png)
+
+可以看出LightGCN的性能是最优的，相对于最好的模型也提高了20%的预测准确率。
+
+-----------------------
+
+论文见RS.pdf
